@@ -61,7 +61,55 @@ public class PizzaPreferences extends AppCompatActivity {
         boolean[] hasToppings = new boolean[toppings.length];
 
         //insert your code here
-
+        String size ="";
+        String crust="";
+        for(int i = 0 ; i < toppings.length ; i++)
+        {
+         if (toppings[i].isChecked())
+         {
+             hasToppings[i] = true;
+         }
+            else
+         {
+             hasToppings[i]= false;
+         }
+            if(rdobtnIndividual.isChecked())
+            {
+                size = "Individual";
+            }
+            else if (rdobtnSmall.isChecked())
+            {
+                size = "Small";
+            }
+            else if (rdobtnMedium.isChecked())
+            {
+                size = "Medium";
+            }
+            else if (rdobtnLarge.isChecked())
+            {
+                size = "Large";
+            }
+            else if (rdobtnExtraLarge.isChecked())
+            {
+                size = "Extra Large";
+            }
+            if (rdobtnThin.isChecked())
+            {
+                crust = "Thin";
+            }
+            else if (rdobtnThick.isChecked())
+            {
+                crust = "Thick";
+            }
+            else if (rdobtnCheeseFilled.isChecked())
+            {
+                crust = "Cheese Filled";
+            }
+            if (chkboxGarlic.isChecked())
+            {
+                crust = "Garlic Crust";
+            }
+        }
         calculatePizzaCost.putExtra("TOPPINGS_BOOLEANS", hasToppings);
         startActivityForResult(calculatePizzaCost, 0);
     }
