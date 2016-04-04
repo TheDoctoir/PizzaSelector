@@ -18,7 +18,7 @@ public class CostCalculator extends AppCompatActivity {
         setContentView(R.layout.activity_cost_calculator);
 
         //constants of cost values
-        final double TOPPING_COST = 0.50;
+        final double TOPPING_COST = 0.75;
         final double INDIVIDUAL_COST = 8.99;
         final double SMALL_COST = 13.49;
         final double MEDIUM_COST = 20.99;
@@ -48,24 +48,56 @@ public class CostCalculator extends AppCompatActivity {
         TextView txtvwCostBreakdown = (TextView) findViewById(R.id.txtvwCostBreakdown);
 
         //Insert your code here.
-        for(int i = 0 ; i < toppingsOnPizza.length ; i++)
-        {
-            if (toppingsOnPizza[i] = true)
-            {
-                toppingCost = toppingCost + 1;
+        for (int i = 0; i < toppingsOnPizza.length; i++) {
+            if (toppingsOnPizza[i] == true) {
+                numToppings = numToppings + 1;
             }
+        }
 
+        toppingCost = numToppings*TOPPING_COST;
 
+        if (sizeName.equals("Individual"))
+        {sizeCost = INDIVIDUAL_COST;}
+        else if (sizeName.equals("Small"))
+        {sizeCost = SMALL_COST;}
+        else if (sizeName.equals("Medium"))
+        {sizeCost = MEDIUM_COST;}
+        else if (sizeName.equals("Large"))
+        {sizeCost = LARGE_COST;}
+        else if (sizeName.equals("Extra Large"))
+        {sizeCost = EXTRA_COST;}
+
+        if (hasGarlicCrust==true)
+        {crustName = crustSelection + " Garlic Crust ";}
+        else {crustName = crustSelection + "Crust";}
+
+        if (crustSelection.equals("Thin"))
+        { crustCost = THIN_CRUST;}
+        else if (crustSelection.equals("Thick"))
+        {crustCost = THICK_CRUST;}
+        else if (crustSelection.equals("Cheese Filled"))
+            {crustCost = CHEESE_FILLED;}
+
+        if (hasGarlicCrust == true )
+        {
+            crustCost = crustCost + GARLIC_CRUST;
+        }
+
+        subtotal = crustCost + toppingCost +sizeCost;
+
+        taxes = subtotal*0.13;
+
+        totalCost = subtotal + taxes;
 
 
         String costs = String.format("Toppings: %d x $0.75 = $%.2f\nSize: %s = $%.2f\n" +
-                "Crust Type: %s = $%.2f\nSubtotal: $%.2f\nTaxes: $%.2f\nTotal: $%.2f",
+                        "Crust Type: %s = $%.2f\nSubtotal: $%.2f\nTaxes: $%.2f\nTotal: $%.2f",
                 numToppings, toppingCost, sizeName, sizeCost, crustName, crustCost,
                 subtotal, taxes, totalCost);
 
         txtvwCostBreakdown.setText(costs);
-        }
     }
+
 
 
     public void backToMenu(View vw){

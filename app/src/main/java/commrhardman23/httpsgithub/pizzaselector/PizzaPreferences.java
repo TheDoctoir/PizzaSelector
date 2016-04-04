@@ -59,59 +59,62 @@ public class PizzaPreferences extends AppCompatActivity {
 
         Intent calculatePizzaCost = new Intent(this, CostCalculator.class);
         boolean[] hasToppings = new boolean[toppings.length];
+        boolean hasGarlicCrust = false;
+        String crustSelection = "";
+        String sizeName = "";
 
         //insert your code here
-        String size ="";
-        String crust="";
-        for(int i = 0 ; i < toppings.length ; i++)
+        for(int i = 0; i < toppings.length ; i++)
         {
-         if (toppings[i].isChecked())
-         {
-             hasToppings[i] = true;
-         }
-            else
-         {
-             hasToppings[i]= false;
-         }
+            if (toppings[i].isChecked()) {
+                hasToppings[i] = true;
+            } else {
+                hasToppings[i] = false;
+            }
+        }
             if(rdobtnIndividual.isChecked())
             {
-                size = "Individual";
+                sizeName = "Individual";
             }
             else if (rdobtnSmall.isChecked())
             {
-                size = "Small";
+                sizeName = "Small";
             }
             else if (rdobtnMedium.isChecked())
             {
-                size = "Medium";
+                sizeName = "Medium";
             }
             else if (rdobtnLarge.isChecked())
             {
-                size = "Large";
+                sizeName = "Large";
             }
             else if (rdobtnExtraLarge.isChecked())
             {
-                size = "Extra Large";
+                sizeName = "Extra Large";
             }
             if (rdobtnThin.isChecked())
             {
-                crust = "Thin";
+                crustSelection = "Thin";
             }
             else if (rdobtnThick.isChecked())
             {
-                crust = "Thick";
+                crustSelection = "Thick";
             }
             else if (rdobtnCheeseFilled.isChecked())
             {
-                crust = "Cheese Filled";
+                crustSelection = "Cheese Filled";
             }
             if (chkboxGarlic.isChecked())
             {
-                crust = "Garlic Crust";
+                hasGarlicCrust = true;
             }
-        }
+
         calculatePizzaCost.putExtra("TOPPINGS_BOOLEANS", hasToppings);
+        calculatePizzaCost.putExtra("SIZE_SELECTION", sizeName);
+        calculatePizzaCost.putExtra("HAS_GARLIC_CRUST", hasGarlicCrust);
+        calculatePizzaCost.putExtra("CRUST_SELECTION", crustSelection);
         startActivityForResult(calculatePizzaCost, 0);
+
     }
 
     /**
